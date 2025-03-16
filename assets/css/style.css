@@ -1,0 +1,759 @@
+body {
+    background: black;
+}
+
+#cursor {
+    position: fixed;
+    width: 1.5vw;
+
+    z-index: 99999999999;
+    pointer-events: none;
+    user-select: none;
+}
+
+.bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+
+    filter: blur(.5vw);
+}
+
+.bg.unblur {
+    filter: none;
+}
+
+.overlay {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background: radial-gradient(circle at top right, #ff131355, #ee751e00);
+    transition: opacity .5s;
+}
+
+/* -------------- */
+/* MAIN CONTAINER */
+/* -------------- */
+.overlay .container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+}
+
+/* Hide overlay */
+
+.overlay .container > .sounds {
+    position: absolute;
+    top: 3%;
+}
+
+.overlay .container > .sounds > .form-switch {
+    display: block;
+
+    user-select: none;
+
+    width: 5vw;
+    height: 1.6vw;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.overlay .container > .sounds > .label {
+    margin: 0;
+    margin-bottom: 0.2vw;
+
+    text-align: center;
+    color: rgba(255, 255, 255, .7);
+    font-size: .6vw;
+    font-family: Poppins;
+}
+
+.overlay .container > .sounds > .form-switch > i {
+    display: block;
+    margin: auto;
+    width: 5vw;
+    height: 1.6vw;
+
+    background-color: #e6e6e63a;
+    border-radius: 0.5vw;
+
+    transform: skew(-20deg, 0);
+    transition: all 0.3s linear;
+}
+
+.overlay .container > .sounds > .left,
+.overlay .container > .sounds > .right {
+    position: absolute;
+    bottom: 0;
+
+    line-height: 1.6vw;
+    color: rgb(0, 0, 0);
+    font-size: .6vw;
+    font-family: PoppinsMedium;
+    pointer-events: none;
+
+    z-index: 99;
+}
+
+.overlay .container > .sounds > .left {
+    left: 12%;
+}
+
+.overlay .container > .sounds > .right {
+    right: 12%;
+}
+
+.overlay .container > .sounds > .form-switch > i::after {
+    content: "";
+    position: absolute;
+    left: 0;
+
+    width: 50%;
+    height: 100%;
+    background-color: rgb(255, 19, 19);
+    border-radius: 0.5vw;
+    box-shadow: 0 0 .5vw 0 rgb(255, 19, 19);
+
+    transition: all 0.2s ease-in-out;
+    transform-origin: left;
+}
+
+.overlay .container > .sounds > .form-switch > input { display: none; }
+
+.overlay .container > .sounds > .form-switch > input:active + i::after { transform: scale(1.2, 1.0); }  
+
+.overlay .container > .sounds > .form-switch > input:checked + i::after { transform: translate3d(100%, 0, 0) }  
+
+.overlay .container > .sounds > .form-switch > input:checked:active + i::after { transform: translate3d(100%, 0, 0) scale(1.2, 1.0); transform-origin: right; }  
+
+/* Socials */
+
+.overlay .container > .socials {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.overlay .container > .socials > .title {
+    writing-mode: vertical-rl;
+    margin: 0;
+
+    color: white;
+    font-size: .8vw;
+    font-family: PoppinsSemibold;
+}
+
+.overlay .container > .socials > .line {
+    flex-shrink: 0;
+
+    margin: .7vw 0vw;
+
+    height: 5vw;
+    width: .05vw;
+
+    background: rgba(255, 255, 255, .2);
+}
+
+.overlay .container > .socials > .buttons > a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: relative;
+
+    margin-bottom: .7vw;
+    width: 2vw;
+    height: 2vw;
+
+    background: white;
+
+    box-shadow: 0 0 .3vw 0 rgba(255, 255, 255, .8);
+    transition:  1s;
+}
+
+
+.overlay .container > .socials > .buttons > a:hover {
+    border-radius: 50px;
+    background: rgb(255, 19, 19);
+  
+}
+
+.overlay .container > .socials > .buttons > a::after {
+    content: "Copié dans la presse papiers !";
+    position: absolute;
+    left: 120%;
+    transform: scale(.7);
+
+    width: max-content;
+
+    margin: 0;
+    padding: .3vw .7vw;
+    background: rgba(0, 0, 0, .3);
+
+    color: white;
+    font-size: .6vw;
+    font-family: PoppinsMedium;
+    opacity: .0;
+    backdrop-filter: blur(.5vw);
+
+    pointer-events: none;
+    user-select: none;
+    z-index: 99999;
+    transition: all 0.5s;
+}
+
+.overlay .container > .socials > .buttons > a.copied::after {
+    transform: scale(1.0);
+    opacity: 1.0;
+}
+
+.overlay .container > .socials > .buttons > a > img {
+    width: 1vw;
+}
+
+/* Information */
+
+.overlay .container > .information {
+    flex-basis: 24%;
+    margin-left: 5vw;
+}
+
+.overlay .container > .information > * {
+    position: relative;
+    margin: 0;
+}
+
+.overlay .container > .information > .title {
+    margin-bottom: .9vw;
+
+    color: white;
+    font-size: 1.2vw;
+    font-family: PoppinsSemibold;
+}
+
+.overlay .container > .information > .title::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -.1vw;
+
+    width: 1vw;
+    height: 1.9vw;
+
+    transform: skew(0deg, 20deg);
+
+    background: rgb(255, 19, 19);
+    box-shadow: 0 0 .5vw 0 rgb(255, 19, 19);
+    z-index: -1;
+}
+
+.overlay .container > .information > .description {
+    height: 6vw;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    transition: height .5s;
+}
+
+.overlay .container > .information > .description > p {
+    margin: 0;
+
+    color: rgba(255, 255, 255, .4);
+    font-size: .8vw;
+    font-family: "Poppins";
+    font-weight: normal;
+}
+
+.overlay .container > .information > .buttons {
+    margin-top: .9vw;
+}
+
+.overlay .container > .information > .buttons > * {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0 2.4vw;
+
+    height: 1.8vw;
+
+    background: white;
+    box-shadow: 0 0 .3vw 0 rgba(255, 255, 255, .8);
+
+    outline: 0;
+    border: 0;
+
+    line-height: 1.7vw;
+    font-size: .6vw;
+    font-family: "PoppinsMedium";
+
+    transition: background .15s;
+}
+
+.overlay .container > .information > .buttons > *:hover {
+    background: rgba(255, 255, 255, .8);
+}
+
+/* Loader */
+
+.overlay .container > .loader {
+    display: flex;
+    flex-direction: column;
+    
+    justify-content: center;
+    align-items: center;
+
+    flex-basis: 20%;
+
+    margin: 0 5vw;
+}
+
+.overlay .container > .loader > .progress {
+    margin: 0;
+    margin-top: .8vw;
+
+    color: white;
+    font-size: .9vw;
+    font-family: "PoppinsMedium";
+}
+
+.overlay .container > .loader > .logo {
+    position: relative;
+}
+
+.overlay .container > .loader > .logo > * {
+    display: block;
+    
+    width: 11vw;
+
+    -webkit-user-drag: none;
+    user-select: none;
+    object-fit: cover;
+    object-position: bottom;
+}
+
+.overlay .container > .loader .transparent-logo {
+    position: relative;
+}
+
+.overlay .container > .loader .filled-logo {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+
+    height: 0%;
+
+    filter: drop-shadow(0 0 .7vw #ff131365);
+    transition: height .3s;
+}
+
+/* Team */
+
+.overlay .container > .categories {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    flex-basis: 33%;
+    max-width: 33%;
+    margin-top: 4vw;
+    margin-left: -1vw;
+}
+
+.overlay .container > .categories > .buttons {
+    flex-basis: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 2vw;
+    margin-bottom: 0.5vw;
+}
+
+.overlay .container > .categories > .buttons > p {
+    display: flex;
+    justify-content: center;
+    position: relative;
+
+    margin: 0;
+
+    font-size: 0.7vw;
+    font-family: "Poppins";
+    color: rgba(255, 255, 255, 0.7);
+
+    text-align: center;
+    text-transform: uppercase;
+    user-select: none;
+    transition: 0.3s color;
+}
+
+.overlay .container > .categories > .buttons > p.active {
+    font-family: "PoppinsMedium";
+    color: white;
+}
+
+.overlay .container > .categories > .buttons > p::before {
+    content: "";
+    position: absolute;
+    bottom: -0.3vw;
+
+    width: 0vw;
+    height: 0.15vw;
+
+    background: #ff1313;
+    box-shadow: 0 0 .5vw 0 #ff1313;
+    border-radius: 1vw;
+
+    transition: 0.3s width;
+}
+
+.overlay .container > .categories > .buttons > p.active::before {
+    width: 1.5vw;
+}
+
+.overlay .container > .categories .carousel {
+    display: flex;
+    width: 100%;
+    overflow: hidden;
+    padding: 2vw 0;
+}
+
+.overlay .container > .categories > .carousel > * {
+    transition: 0.5s transform;
+}
+
+.overlay .container > .categories .socialmedia {
+    display: flex;
+    gap: 1vw;
+
+    flex-shrink: 0;
+    
+    align-content: flex-start;
+    flex-wrap: wrap;
+
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0 4vw;
+}
+
+.overlay .container > .categories .socialmedia > .box {
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    flex-shrink: 1;
+    flex-grow: 1;
+
+    min-width: 0;
+    height: 4vw;
+    background: linear-gradient(to bottom left, rgba(255, 174, 0, 0.25)), rgba(255, 19, 19, 0.795);
+    box-shadow: 0 0 0.5vw 0 #ee1e1e47;
+
+    border: solid 0.2vw #ff1313;
+    border-radius: 1.4vw;
+
+    padding: 0 1vw;
+    box-sizing: border-box;
+
+    transition: 0.2s background-color;
+}
+
+.overlay .container > .categories .socialmedia > .box .icon {
+    width: 1.5vw;
+    height: 1.5vw;
+
+    margin-right: 1vw;
+}
+
+.overlay .container > .categories .socialmedia > .box * {
+    user-select: none;
+}
+
+.overlay .container > .categories .socialmedia > .box .title {
+    margin: 0;
+
+    font-size: 0.7vw;
+    font-family: "PoppinsSemibold";
+    color: white;
+}
+
+.overlay .container > .categories .socialmedia > .box .description {
+    margin: 0;
+
+    font-size: 0.65vw;
+    font-family: "Poppins";
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.overlay .container > .categories .socialmedia > .box:hover {
+    background-color: rgba(226, 0, 0, 0.2);
+}
+
+.overlay .container > .categories .socialmedia > .box::after {
+    content: "Copied to clipboard!";
+    position: absolute;
+
+    transform: scale(.7) translateX(-50%);
+    transform-origin: left;
+
+    top: 110%;
+    left: 50%;
+
+    width: max-content;
+
+    margin: 0;
+    padding: .3vw .7vw;
+    background: rgba(0, 0, 0, .3);
+
+    color: white;
+    font-size: .6vw;
+    font-family: PoppinsMedium;
+    opacity: .0;
+    backdrop-filter: blur(.5vw);
+
+    pointer-events: none;
+    user-select: none;
+    z-index: 99999;
+    transition: all .15s;
+}
+
+.overlay .container > .categories .socialmedia > .box.copied::after {
+    transform: scale(1.0) translateX(-50%);
+    opacity: 1.0;
+}
+
+.overlay .container > .categories .staff {
+    display: flex;
+    flex-shrink: 0;
+    
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+}
+
+.overlay .container > .categories .staff .cards {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    position: relative;
+    width: 23.4vw;
+    height: 16.5vw;
+    overflow-x: hidden;
+}
+
+.overlay .container > .categories .staff .innercards {
+    display: flex;
+    width: 100%;
+    height: 14.5vw;
+    transform: translateX(calc(0% - .6vw));
+
+    transition: transform .5s;
+}
+
+.overlay .container > .categories .staff .pages {
+    display: flex;
+    margin-top: .5vw;
+}
+
+.overlay .container > .categories .staff .pages > div {
+    width: .4vw;
+    height: .4vw;
+
+    margin: 0 .15vw;
+
+    border-radius: 1vw;
+    background: rgba(255, 255, 255, .5);
+    transition: all .15s;
+}
+
+.overlay .container > .categories .staff .pages > div.active {
+    background: white;
+    transform: scale(1.2);
+}
+
+.overlay .container > .categories .staff .card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    position: relative;
+    flex-shrink: 0;
+    flex-grow: 0;
+
+    width: 11vw;
+    height: 95%;
+
+    margin: 0 .6vw;
+
+    border-radius: 1.2vw;
+    background: linear-gradient(to bottom left, rgba(223, 102, 3, 0.25), rgba(15, 120, 183, .2)), url(../media/border.png);
+    background-size: cover, 112% 111%;
+    background-position: center, center;
+}
+
+.overlay .container > .categories .staff .card > .name {
+    margin: 0;
+    margin-top: 1.7vw;
+
+    color: white;
+    font-size: 1vw;
+    font-family: PoppinsMedium;
+}
+
+.overlay .container > .categories .staff .card > .description {
+    margin: 0;
+    margin-top: .5vw;
+    margin-left: 1vw;
+    margin-right: .5vw;
+
+    color: rgba(255, 255, 255, .7);
+    font-size: .7vw;
+    font-family: Poppins;
+}
+
+.overlay .container > .categories .staff .card > .avatar {
+    display: block;
+    margin: 0 auto;
+    margin-top: 1.5vw;
+
+    width: 7vw;
+
+    border-radius: 5vw;
+    object-fit: cover;
+}
+
+.overlay .container > .categories .staff .card::after {
+    content: "";
+    position: absolute;
+    bottom: -.15vw;
+    width: 50%;
+    height: .3vw;
+
+    border-radius: 1vw;
+    background: var(--color);
+    box-shadow: 0 0 .5vw 0 var(--color);
+}
+
+.overlay .container > .categories .staff .previous,
+.overlay .container > .categories .staff .next {
+    margin: .8vw;
+    width: 1.5vw;
+    height: 1.5vw;
+
+    background: url(../media/icons/chevron.png);
+    background-size: cover;
+
+    margin-bottom: 2.5vw;
+
+    opacity: .5;
+    transition: opacity .15s;
+}
+
+.overlay .container > .categories .staff .previous:hover,
+.overlay .container > .categories .staff .next:hover {
+    opacity: 1.0;
+}
+
+.overlay .container > .categories .staff .next {
+    transform: rotate(180deg);
+}
+
+/* Hide overlay */
+
+.overlay .container > .hideoverlay {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    bottom: 3%;
+
+    user-select: none;
+}
+
+.overlay .container > .hideoverlay .bind {
+    width: 1vw;
+    height: 1vw;
+    border-radius: .2vw;
+    background: white;
+
+    margin-right: .4vw;
+
+    line-height: 1vw;
+    text-align: center;
+    color: rgb(0, 0, 0);
+
+    font-size: .7vw;
+    font-family: PoppinsSemibold;
+}
+
+.overlay .container > .hideoverlay {
+    line-height: 1vw;
+    color: rgba(255, 255, 255, .7);
+    font-size: .6vw;
+    font-family: Poppins;
+}
+
+.pausevideo {
+    display: flex;
+    position: absolute;
+    bottom: 9%;
+    left: 45%;
+    user-select: none;
+}
+
+
+
+.pausevideo  .bindPause  h4{
+    position: absolute;
+    top: -8px;
+    padding: 2px;
+    width: 2.8vw;
+    height: 0.8vw;
+    border-radius: 0.2vw;
+    background: white;
+    margin-right: 0.4vw;
+    line-height: 1vw;
+    text-align: center;
+    color: black;
+    font-size: .6vw;
+    font-family: PoppinsSemibold;
+}
+
+.pausevideo  .bindPause  p {
+    position: relative;
+   top: -5px;
+    margin-bottom: 10px;
+    margin-left: 52px;
+    line-height: 1vw;
+    color: rgba(255, 255, 255, .7);
+    width: 150px;
+    font-size: 10px;
+    font-family: Poppins;
+}
+
+.bind-total {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.espace strong {
+    color: #fff;
+}

@@ -1,0 +1,102 @@
+<html>
+    <header>
+        <link rel="stylesheet" href="assets/css/all.min.css">
+        <link rel="stylesheet" href="assets/css/style.css">
+        <link rel="stylesheet" href="assets/css/fonts.css">
+        <title>designed by kıyafet ekliyecem diye 18 tane script bozan meth ucubesi</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script type="text/javascript" src="assets/scripts/all.min.js"></script>
+    </header>
+    <body>
+        <video id="myVideo" controls autoplay preload="auto" class="bg">
+            <source src="assets/media/peysoh.mp4" type="video/mp4">
+            Tarayıcınız video etiketini desteklemiyor.
+        </video>
+        
+        <script> 
+            document.addEventListener("DOMContentLoaded", function() {
+                var vid = document.getElementById("myVideo");
+                vid.volume = 0.8;
+                
+                vid.play().then(() => {
+                    console.log("Video oynatılıyor");
+                }).catch(error => {
+                    console.log("Autoplay engellendi veya hata oluştu:", error);
+                    vid.muted = true; 
+                    vid.play(); // Sessiz modda başlatmayı dene
+                });
+            });
+        </script> 
+
+        <script>
+            window.onload = function() {
+                var myVideo = document.getElementById("myVideo");
+                document.onkeydown = function(event) {
+                    switch (event.keyCode) {
+                        case 32: // SpaceBar
+                            myVideo.muted = !myVideo.muted;
+                            break;
+                    }
+                    return false;
+                }
+            }
+        </script>
+
+        <img id="cursor" src="assets/media/cursor.png">
+
+        <div class="overlay">
+            <div class="container">
+                <div class="socials">
+                    <p class="title">Sosyal Ağlar</p>
+                    <div class="line"></div>
+                    <div class="buttons"></div>
+                </div>
+
+                <div class="information">
+                    <p class="title">culvercity.rpg</p>
+                    <div class="description">
+                        <p>culvercity.rpg</p>
+                        <p>Faction'u sonuna kadar tatmak için culvercity.rpg tam yeri. Hoş geldiniz..</p>
+                    </div>
+                    <div class="buttons">
+                        <button id="collapse" style="display: none;">devam</button>
+                        <button id="read-more">küçült <i class="fal fa-long-arrow-right" style="margin-left: 0.4vw;font-size: 0.9vw;"></i></button>
+                    </div>
+                </div>
+
+                <div class="loader">
+                    <div class="logo">
+                        <img class="transparent-logo" src="assets/media/transparent-logo.png">
+                    </div>
+                    <p class="progress">0%</p>
+                </div>
+
+                <div class="categories">
+                    <div class="buttons"></div>
+                    <div class="carousel">
+                        <div class="staff">
+                            <div class="cards">
+                                <div class="innercards"></div>
+                                <div class="pages"></div>
+                            </div>
+                        </div>
+                        <div class="socialmedia"></div>
+                    </div>
+                </div>
+
+                <div class="hideoverlay">
+                    <div class="espace">
+                        <p>sesi kapatmak için <strong>ESPACE</strong> tuşuna basın</p>
+                    </div>
+                    <div class="bind-total">      
+                        <div class="bind"></div>
+                        Bindirmeyi Gizle/Videoyu Görüntüle
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="assets/scripts/config.js" type="text/javascript"></script>
+        <script src="assets/scripts/main.js" type="text/javascript"></script>
+    </body>
+</html>
